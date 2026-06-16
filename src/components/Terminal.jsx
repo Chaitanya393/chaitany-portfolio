@@ -21,29 +21,24 @@ export default function Terminal() {
   const [formMsg, setFormMsg] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [sendProgress, setSendProgress] = useState(0);
-  const isFirstRender = useRef(true);
+  const hasInteracted = useRef(false);
 
-  // Scroll to bottom on updates (skip initial render)
+  // Scroll to bottom only after user has interacted with the terminal
   useEffect(() => {
-    if (isFirstRender.current) {
+    if (!hasInteracted.current) {
       return;
     }
     logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [history, matrixMode]);
-
-  // Track initial mount to handle React Strict Mode in development
-  useEffect(() => {
-    isFirstRender.current = false;
-    return () => {
-      isFirstRender.current = true;
-    };
-  }, []);
 
   // Command handlers
   const handleCommand = (cmdText) => {
     const trimmed = cmdText.trim();
     const cleanCmd = trimmed.toLowerCase();
     
+    // Mark that the user has interacted — enables auto-scroll from here on
+    hasInteracted.current = true;
+
     // Add command itself to history
     let newHistory = [...history, { text: `guest@chaitany-tiwari:~$ ${trimmed}`, type: 'input' }];
 
