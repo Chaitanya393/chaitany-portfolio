@@ -35,7 +35,7 @@ export default function Terminal() {
   const handleCommand = (cmdText) => {
     const trimmed = cmdText.trim();
     const cleanCmd = trimmed.toLowerCase();
-    
+
     // Mark that the user has interacted — enables auto-scroll from here on
     hasInteracted.current = true;
 
@@ -58,7 +58,7 @@ export default function Terminal() {
       const finalMsg = trimmed;
       newHistory.push({ text: `[SYSTEM]: MESSAGE REGISTERED`, type: 'sys' });
       newHistory.push({ text: 'TRANSMITTING ENCRYPTED PACKET TO CHAITANYA...', type: 'sys' });
-      
+
       // Simulate API submit latency
       setTimeout(() => {
         setHistory(prev => [
@@ -69,12 +69,12 @@ export default function Terminal() {
           { text: '✓ PACKET RECEIVED SUCCESSFULLY. TRANSMISSION COMPLETE.', type: 'success' },
           { text: 'Thank you! I will respond to your message shortly.', type: 'success' }
         ]);
-        
+
         // Open mailto link
         const mailtoUrl = `mailto:chaitanyatiwari2468@gmail.com?subject=Portfolio Uplink from CLI&body=${encodeURIComponent(finalMsg)}%0A%0A---%0ASender Email: ${encodeURIComponent(contactData.email)}`;
         window.location.href = mailtoUrl;
       }, 800);
-      
+
       setContactStep(0);
       setContactData({ email: '', message: '' });
       setHistory(newHistory);
@@ -99,7 +99,7 @@ export default function Terminal() {
           type: 'output'
         });
         break;
-      
+
       case 'clear':
         setHistory([]);
         setInputVal('');
@@ -291,7 +291,7 @@ and modular components.`,
       const matrix = () => {
         ctx.fillStyle = 'rgba(13, 13, 13, 0.08)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
+
         ctx.fillStyle = '#06B6D4';
         ctx.font = '12px monospace';
 
@@ -309,7 +309,7 @@ and modular components.`,
       };
 
       const interval = setInterval(matrix, 33);
-      
+
       const handleResize = () => {
         if (!canvas) return;
         canvas.width = canvas.parentElement.clientWidth;
@@ -326,7 +326,7 @@ and modular components.`,
     return (
       <div className="absolute inset-0 z-30 bg-bg">
         <canvas ref={canvasRef} className="w-full h-full block opacity-70" />
-        <button 
+        <button
           onClick={() => setMatrixMode(false)}
           className="absolute top-4 right-4 z-40 px-3 py-1.5 bg-[#141414] border border-cyanAccent text-cyanAccent font-mono text-xs hover:bg-cyanAccent hover:text-bg transition-colors"
         >
@@ -337,7 +337,7 @@ and modular components.`,
   };
 
   return (
-    <section className="relative w-full py-12 md:py-16 px-6 md:px-12 bg-bg border-b border-hairline flex flex-col items-center">
+    <section className="relative w-full py-12 md:py-16 px-6 md:px-12 bg-bg border-b border-hairline flex flex-col items-center pb-24 lg:pb-16">
       {/* Title */}
       <div className="w-full text-left mb-8">
         <div className="font-mono text-[10px] text-cyanAccent tracking-widest mb-1.5 uppercase">ENCRYPTED_PORT // SOCKET_ESTABLISHED</div>
@@ -367,14 +367,13 @@ and modular components.`,
           {/* Terminal Output display panel */}
           <div className="flex-grow p-4 overflow-y-auto font-mono text-[11px] leading-relaxed text-secondary text-left space-y-2 select-text custom-scrollbars relative scanlines">
             {history.map((log, i) => (
-              <div 
-                key={i} 
-                className={`whitespace-pre-wrap ${
-                  log.type === 'input' ? 'text-primary font-bold' :
+              <div
+                key={i}
+                className={`whitespace-pre-wrap ${log.type === 'input' ? 'text-primary font-bold' :
                   log.type === 'error' ? 'text-red-500' :
-                  log.type === 'success' ? 'text-green-500' :
-                  log.type === 'sys' ? 'text-[#06B6D4]' : 'text-secondary'
-                }`}
+                    log.type === 'success' ? 'text-green-500' :
+                      log.type === 'sys' ? 'text-[#06B6D4]' : 'text-secondary'
+                  }`}
               >
                 {log.text}
               </div>
@@ -385,7 +384,7 @@ and modular components.`,
           {/* Command Input Area */}
           <div className="border-t border-hairline bg-surface1 px-4 py-3 flex items-center font-mono text-[11px]">
             <span className="text-[#06B6D4] font-bold select-none mr-2">guest@chaitany-tiwari:~$</span>
-            
+
             <input
               type="text"
               value={inputVal}
@@ -394,8 +393,8 @@ and modular components.`,
               placeholder={contactStep === 0 ? "type a command e.g. 'help'..." : ""}
               className="flex-grow bg-transparent text-primary outline-none caret-[#06B6D4]"
             />
-            
-            <button 
+
+            <button
               onClick={() => handleCommand(inputVal)}
               className="text-[#888] hover:text-cyanAccent transition-colors pl-2"
             >
@@ -408,7 +407,7 @@ and modular components.`,
         <div className="lg:col-span-5 flex flex-col justify-between bg-[#0e0e0e] border border-hairline rounded relative overflow-hidden p-5 font-mono shadow-2xl min-h-[360px]">
           {/* Scanline overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyanAccent/5 to-transparent w-full h-[5px] animate-[scan_4s_linear_infinite] pointer-events-none z-10"></div>
-          
+
           <div className="absolute top-0 right-4 px-1.5 py-0.5 border-b border-x border-hairline text-[8px] text-secondary bg-bg select-none">
             PORT: SSL_UPLINK
           </div>
@@ -485,7 +484,7 @@ and modular components.`,
                 type="submit"
                 className="w-full py-3 bg-electric border border-electric text-primary hover:bg-transparent hover:text-electric transition-all tracking-widest text-xs uppercase flex justify-center items-center gap-2 mt-4 font-bold"
               >
-                <span>ESTABLISH_UPLINK</span>
+                <span>CONTACT_ME</span>
                 <span>→</span>
               </button>
             )}

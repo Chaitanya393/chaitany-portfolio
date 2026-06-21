@@ -112,7 +112,7 @@ export default function About() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Photo Area & Specs */}
-        <div className="lg:col-span-4 flex flex-col items-center">
+        <div className="lg:col-span-4 flex flex-col items-center mx-auto lg:mx-0 w-full">
           {/* Avatar Container with corner brackets */}
           <div className="relative p-2.5 bg-surface1 border border-hairline rounded w-full max-w-[260px] aspect-square flex justify-center items-center">
             {/* Corners */}

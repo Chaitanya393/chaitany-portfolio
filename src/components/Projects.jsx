@@ -87,7 +87,7 @@ export default function MemoraliveStream() {
         <svg viewBox="0 0 320 160" className="w-full h-full text-secondary font-mono">
           {/* Legend */}
           <rect x="5" y="5" width="310" height="150" fill="none" stroke="#222" strokeWidth="1" />
-          
+
           {/* Nodes */}
           {/* Client node */}
           <rect x="10" y="55" width="82" height="36" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
@@ -176,7 +176,7 @@ class StockGenieAnalyzer:
               <span className="text-primary font-bold">NIFTY_50: 23,450.60</span>
               <span className="text-green-500 font-bold">+1.45%</span>
             </div>
-            
+
             {/* Stock Chart Graphic */}
             <div className="h-16 border-b border-dashed border-hairline relative flex items-end">
               <svg viewBox="0 0 100 30" className="w-full h-full text-cyanAccent">
@@ -203,7 +203,7 @@ class StockGenieAnalyzer:
       architectureRender: () => (
         <svg viewBox="0 0 320 160" className="w-full h-full text-secondary font-mono">
           <rect x="5" y="5" width="310" height="150" fill="none" stroke="#222" strokeWidth="1" />
-          
+
           {/* Nodes */}
           {/* Client dashboard */}
           <rect x="10" y="55" width="82" height="36" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
@@ -294,7 +294,7 @@ export async function authorizeRBAC(req, res, next) {
               <span>ROLE: SYS_ADMIN</span>
               <span className="text-green-500">VERIFIED</span>
             </div>
-            
+
             <div className="border border-hairline p-1.5 bg-[#141414] rounded flex items-center justify-between text-[9px]">
               <span>TOKEN_MD5: 9A2F...E931</span>
               <span className="text-cyanAccent font-bold">ACTIVE</span>
@@ -317,7 +317,7 @@ export async function authorizeRBAC(req, res, next) {
       architectureRender: () => (
         <svg viewBox="0 0 320 160" className="w-full h-full text-secondary font-mono">
           <rect x="5" y="5" width="310" height="150" fill="none" stroke="#222" strokeWidth="1" />
-          
+
           {/* Nodes */}
           {/* Client request */}
           <rect x="10" y="55" width="82" height="36" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
@@ -380,7 +380,7 @@ export async function authorizeRBAC(req, res, next) {
   return (
     <section className="relative w-full border-b border-hairline py-12 md:py-16 px-6 md:px-12 bg-[#0E0E0E]">
       {/* Title */}
-      <div className="mb-10 text-left flex justify-between items-end">
+      <div className="mb-10 text-left flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
         <div>
           <div className="font-mono text-[10px] text-cyanAccent tracking-widest mb-1.5 uppercase">PROJECT_LOGS // REPOSITORY_DIAGNOSTICS</div>
           <h2 className="font-display font-bold text-2xl md:text-3xl text-primary tracking-tight">
@@ -389,26 +389,26 @@ export async function authorizeRBAC(req, res, next) {
         </div>
 
         {/* View Mode Toggle Controls */}
-        <div className="flex font-mono text-[9px] border border-hairline bg-surface1 p-0.5 rounded">
+        <div className="flex font-mono text-[9px] border border-hairline bg-surface1 p-0.5 rounded w-fit">
           <button
             onClick={() => setViewMode('mockup')}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              viewMode === 'mockup'
-                ? 'bg-cyanAccent text-bg font-bold'
-                : 'text-secondary hover:text-primary'
-            }`}
+            className={`px-2.5 py-1 rounded transition-colors ${viewMode === 'mockup'
+              ? 'bg-cyanAccent text-bg font-bold'
+              : 'text-secondary hover:text-primary'
+              }`}
           >
-            [MOCKUP_VIEW]
+            <span className="hidden sm:inline">[MOCKUP_VIEW]</span>
+            <span className="sm:hidden">[MOCKUP]</span>
           </button>
           <button
             onClick={() => setViewMode('architecture')}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              viewMode === 'architecture'
-                ? 'bg-cyanAccent text-bg font-bold'
-                : 'text-secondary hover:text-primary'
-            }`}
+            className={`px-2.5 py-1 rounded transition-colors ${viewMode === 'architecture'
+              ? 'bg-cyanAccent text-bg font-bold'
+              : 'text-secondary hover:text-primary'
+              }`}
           >
-            [SYS_ARCHITECTURE]
+            <span className="hidden sm:inline">[SYS_ARCHITECTURE]</span>
+            <span className="sm:hidden">[ARCH]</span>
           </button>
         </div>
       </div>
@@ -426,11 +426,10 @@ export async function authorizeRBAC(req, res, next) {
                   setActiveTab(idx);
                   setTilt({ x: 0, y: 0 }); // reset
                 }}
-                className={`group flex items-center gap-1.5 px-4 py-2 border-t border-x rounded-t font-mono text-[11px] transition-all ${
-                  isActive
-                    ? 'bg-surface1 text-primary border-hairline'
-                    : 'bg-[#181818] text-secondary border-transparent hover:text-primary hover:bg-[#1a1a1a]'
-                }`}
+                className={`group flex items-center gap-1.5 px-4 py-2 border-t border-x rounded-t font-mono text-[11px] transition-all ${isActive
+                  ? 'bg-surface1 text-primary border-hairline'
+                  : 'bg-[#181818] text-secondary border-transparent hover:text-primary hover:bg-[#1a1a1a]'
+                  }`}
               >
                 <FileCode size={12} className={isActive ? 'text-cyanAccent' : 'text-secondary'} />
                 <span>{proj.tabName}</span>
@@ -450,7 +449,7 @@ export async function authorizeRBAC(req, res, next) {
               <span>CONSOLE_EDITOR</span>
               <span>LINES: 18</span>
             </div>
-            
+
             {/* Simulated Line Numbers */}
             <div className="flex gap-4">
               <div className="text-[#333] select-none text-right border-r border-hairline/20 pr-2.5 flex flex-col font-bold">
@@ -500,7 +499,7 @@ export async function authorizeRBAC(req, res, next) {
             </div>
 
             {/* Simulated Mockup with 3D Tilt */}
-            <div 
+            <div
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               style={{
@@ -533,15 +532,15 @@ export async function authorizeRBAC(req, res, next) {
 
             {/* Action buttons */}
             <div className="flex gap-4 font-mono text-xs">
-              <a 
+              {/* <a 
                 href={activeProj.github} 
                 target="_blank" 
                 rel="noreferrer" 
                 className="flex-1 text-center py-2.5 bg-surface1 border border-hairline text-secondary hover:text-primary hover:border-cyanAccent transition-all rounded"
               >
                 [01]_VIEW_SOURCE_CODE
-              </a>
-              <a 
+              </a> */}
+              <a
                 href={activeProj.live}
                 className="flex-1 text-center py-2.5 bg-electric border border-electric text-primary hover:bg-transparent hover:text-electric transition-all rounded"
               >

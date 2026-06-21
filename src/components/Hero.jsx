@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Terminal, Shield, Cpu, Activity, Award } from 'lucide-react';
+import { Terminal, Shield, Cpu, Activity, Award, Mail, Copy, Check } from 'lucide-react';
 
 export default function Hero({ onNavigate }) {
   const [typedText, setTypedText] = useState('');
@@ -7,7 +7,14 @@ export default function Hero({ onNavigate }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 150, y: 150 });
   const [isHovered, setIsHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
   const containerRef = useRef(null);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('chaitanyatiwari2468@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const roles = [
     'ARCHITECTING DISTRIBUTED MICROSERVICES & API GATEWAYS...',
@@ -56,7 +63,7 @@ export default function Hero({ onNavigate }) {
   };
 
   return (
-    <section 
+    <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -125,19 +132,50 @@ export default function Hero({ onNavigate }) {
 
         {/* CTA Controls */}
         <div className="flex flex-wrap gap-4">
-          <button 
-            onClick={() => onNavigate('contact')}
+          <button
+            onClick={() => onNavigate('terminal')}
             className="group px-6 py-3 bg-electric border border-electric text-primary font-mono text-xs md:text-sm tracking-widest hover:bg-transparent hover:text-electric transition-all duration-300 flex items-center gap-2"
           >
-            <span>[01]_ESTABLISH_LINK</span>
+            <span>[01]_CONTACT_LINK</span>
             <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
           </button>
-          <button 
+          <button
             onClick={() => onNavigate('projects')}
             className="group px-6 py-3 bg-surface1 border border-hairline text-secondary hover:text-primary hover:border-cyanAccent hover:shadow-[0_0_10px_rgba(6,182,212,0.2)] font-mono text-xs md:text-sm tracking-widest transition-all duration-300 flex items-center gap-2"
           >
             <span>[02]_DECODE_PROJECT_LOGS</span>
             <span className="text-[9px] text-cyanAccent group-hover:animate-pulse">[*]</span>
+          </button>
+        </div>
+
+        {/* Email Uplink */}
+        <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-xs text-secondary animate-fade-in">
+          <div className="flex items-center gap-2">
+            <span className="text-hairline">// EMAIL_UPLINK:</span>
+            <a
+              href="mailto:chaitanyatiwari2468@gmail.com"
+              className="text-cyanAccent hover:text-electric transition-colors duration-200 font-bold flex items-center gap-1.5"
+            >
+              <Mail size={12} className="animate-pulse" />
+              chaitanyatiwari2468@gmail.com
+            </a>
+          </div>
+          <button
+            onClick={handleCopyEmail}
+            className="px-2 py-0.5 bg-[#141414] border border-hairline hover:border-cyanAccent hover:text-primary rounded text-[10px] transition-all flex items-center gap-1.5 active:scale-95"
+            title="Copy email to clipboard"
+          >
+            {copied ? (
+              <>
+                <Check size={10} className="text-green-500" />
+                <span className="text-green-500 text-[8px] uppercase tracking-wider">COPIED</span>
+              </>
+            ) : (
+              <>
+                <Copy size={10} className="text-secondary group-hover:text-primary" />
+                <span className="text-[8px] uppercase tracking-wider">COPY</span>
+              </>
+            )}
           </button>
         </div>
       </div>
@@ -150,17 +188,17 @@ export default function Hero({ onNavigate }) {
           {isHovered && (
             <>
               {/* Horizontal line at mouse Y */}
-              <div 
+              <div
                 className="absolute left-0 right-0 border-t border-cyanAccent/20 pointer-events-none"
                 style={{ top: `${mousePos.y}px` }}
               ></div>
               {/* Vertical line at mouse X */}
-              <div 
+              <div
                 className="absolute top-0 bottom-0 border-l border-cyanAccent/20 pointer-events-none"
                 style={{ left: `${mousePos.x}px` }}
               ></div>
               {/* Label overlay with mouse positioning info */}
-              <div 
+              <div
                 className="absolute px-1.5 py-0.5 bg-[#141414] border border-cyanAccent text-[9px] text-cyanAccent font-mono pointer-events-none"
                 style={{ left: `${mousePos.x + 10}px`, top: `${mousePos.y + 10}px` }}
               >
@@ -175,11 +213,11 @@ export default function Hero({ onNavigate }) {
             <circle cx="150" cy="150" r="140" fill="none" stroke="#222" strokeWidth="1" strokeDasharray="4 4" />
             <circle cx="150" cy="150" r="100" fill="none" stroke="#222" strokeWidth="1" />
             <circle cx="150" cy="150" r="70" fill="none" stroke="#222" strokeWidth="1" strokeDasharray="8 4" />
-            
+
             {/* Axial Cross-hair lines */}
             <line x1="10" y1="150" x2="290" y2="150" stroke="#1f1f1f" strokeWidth="1.5" />
             <line x1="150" y1="10" x2="150" y2="290" stroke="#1f1f1f" strokeWidth="1.5" />
-            
+
             {/* Calibration Rings (rotating) */}
             <g className="origin-center animate-[spin_40s_linear_infinite]">
               <circle cx="150" cy="150" r="120" fill="none" stroke="#2563EB" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="10 30 50 10" />
@@ -204,7 +242,7 @@ export default function Hero({ onNavigate }) {
                 return (
                   <path
                     key={i}
-                    d={`M ${tx-4} ${ty-4} L ${tx+4} ${ty-4} L ${tx+2} ${ty+6} L ${tx-2} ${ty+6} Z`}
+                    d={`M ${tx - 4} ${ty - 4} L ${tx + 4} ${ty - 4} L ${tx + 2} ${ty + 6} L ${tx - 2} ${ty + 6} Z`}
                     fill="#333"
                     stroke="#555"
                     strokeWidth="1"
@@ -232,7 +270,7 @@ export default function Hero({ onNavigate }) {
               const y2 = 150 + Math.sin(angle) * (i % 2 === 0 ? 128 : 132);
               return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#2a2a2a" strokeWidth="1" />;
             })}
-            
+
             {/* Blueprint annotations */}
             <text x="15" y="40" fill="#888" className="font-mono text-[7px]">SYSTEM: ACTV_DEVC</text>
             <text x="15" y="52" fill="#888" className="font-mono text-[7px]">FREQ: 60Hz // CLK_OK</text>
