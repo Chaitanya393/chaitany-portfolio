@@ -8,7 +8,83 @@ export default function Projects() {
 
   const projectData = [
     {
-      id: 0,
+      id: 3,
+      name: 'Nesting ERP',
+      tabName: 'NestingERP.tsx',
+      role: 'Full Stack Developer',
+      tech: ['Next.js', 'React', 'Node.js', 'Express.js', 'MongoDB', 'React Native', 'JWT'],
+      summary: 'Built and evolved a production-oriented ERP ecosystem for student housing and property operations, spanning admin workflows, resident management, tenant onboarding, expenses, salaries, and a mobile-first experience.',
+      metrics: {
+        platform: 'WEB + MOBILE',
+        architecture: 'FULL_STACK',
+        delivery: 'END_TO_END',
+      },
+      codeSnippet: `// Nesting ERP — full-stack workflow
+const tenant = await tenantService.createApplication(payload);
+const resident = await residentService.enroll(tenant);
+
+await billingService.syncExpenses(resident);
+await notificationService.dispatch(resident);
+
+return api.success({ resident, status: 'ACTIVE' });`,
+      vectorRender: () => (
+        <div className="w-full h-full bg-[#111] border border-hairline rounded p-3 font-mono flex flex-col justify-between">
+          <div className="flex justify-between items-center border-b border-hairline pb-2 mb-2">
+            <span className="text-xs font-bold text-cyanAccent">NESTING_ERP // LIVE</span>
+            <span className="text-[8px] text-green-500 bg-green-500/10 px-1 border border-green-500/20">SYSTEM_READY</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 flex-grow">
+            <div className="border border-hairline bg-[#161616] rounded p-2">
+              <div className="text-[8px] text-secondary mb-2">OPERATIONS</div>
+              <div className="space-y-1.5 text-[9px]">
+                <div className="flex justify-between"><span>Residents</span><span className="text-cyanAccent">ACTIVE</span></div>
+                <div className="flex justify-between"><span>Tenants</span><span className="text-cyanAccent">SYNCED</span></div>
+                <div className="flex justify-between"><span>Expenses</span><span className="text-cyanAccent">TRACKED</span></div>
+              </div>
+            </div>
+            <div className="border border-hairline bg-[#161616] rounded p-2">
+              <div className="text-[8px] text-secondary mb-2">PLATFORM</div>
+              <div className="space-y-1.5 text-[9px]">
+                <div className="flex justify-between"><span>Web</span><span className="text-green-500">ONLINE</span></div>
+                <div className="flex justify-between"><span>Mobile</span><span className="text-green-500">ONLINE</span></div>
+                <div className="flex justify-between"><span>API</span><span className="text-green-500">ONLINE</span></div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-2 text-[8px] text-secondary flex justify-between">
+            <span>STACK: NEXT + NODE + MONGO</span>
+            <span>MODE: PRODUCTION</span>
+          </div>
+        </div>
+      ),
+      architectureRender: () => (
+        <svg viewBox="0 0 320 160" className="w-full h-full text-secondary font-mono">
+          <rect x="5" y="5" width="310" height="150" fill="none" stroke="#222" strokeWidth="1" />
+          <rect x="10" y="55" width="78" height="36" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
+          <text x="49" y="71" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Next.js ERP</text>
+          <text x="49" y="82" textAnchor="middle" fill="#888" fontSize="6">Admin / Resident</text>
+          <rect x="112" y="55" width="88" height="36" fill="#141414" stroke="#2563EB" strokeWidth="1.5" />
+          <text x="156" y="71" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Node / Express</text>
+          <text x="156" y="82" textAnchor="middle" fill="#888" fontSize="6">REST / JWT</text>
+          <rect x="224" y="20" width="84" height="36" fill="#141414" stroke="#F59E0B" strokeWidth="1.5" />
+          <text x="266" y="36" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">MongoDB</text>
+          <text x="266" y="47" textAnchor="middle" fill="#888" fontSize="6">ERP Data</text>
+          <rect x="224" y="90" width="84" height="36" fill="#141414" stroke="#222" strokeWidth="1.5" />
+          <text x="266" y="106" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">React Native</text>
+          <text x="266" y="117" textAnchor="middle" fill="#888" fontSize="6">Mobile Client</text>
+          <path d="M 88 73 L 112 73" fill="none" stroke="#06B6D4" strokeWidth="1" />
+          <path d="M 200 73 L 214 73 L 214 38 L 224 38" fill="none" stroke="#2563EB" strokeWidth="1" />
+          <path d="M 200 73 L 214 73 L 214 108 L 224 108" fill="none" stroke="#2563EB" strokeWidth="1" />
+          <circle cx="100" cy="73" r="2" fill="#06B6D4" className="animate-ping" />
+          <circle cx="100" cy="73" r="1.5" fill="#06B6D4" />
+        </svg>
+      ),
+      github: 'https://github.com/Chaitanya393/nesting-frontend',
+      live: 'https://github.com/Chaitanya393/nesting-frontend'
+    },
+
+    {
+      id: 3,
       name: 'Memoralive',
       tabName: 'Memoralive.tsx',
       role: 'Frontend Developer',
@@ -127,7 +203,7 @@ export default function MemoraliveStream() {
       live: '#'
     },
     {
-      id: 1,
+      id: 3,
       name: 'Stock Genie',
       tabName: 'StockGenie.py',
       role: 'Creator & Lead Developer',
@@ -243,7 +319,7 @@ class StockGenieAnalyzer:
       live: '#'
     },
     {
-      id: 2,
+      id: 3,
       name: 'Identity Access Module',
       tabName: 'AccessModule.json',
       role: 'Creator & Lead Developer',
