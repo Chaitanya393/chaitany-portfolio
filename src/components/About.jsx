@@ -8,7 +8,7 @@ export default function About() {
 
   // Simple count-up telemetry effect on load
   useEffect(() => {
-    const yearsEnd = 2.8;
+    const yearsEnd = 3.5;
     const projectsEnd = 3;
     const skillsEnd = 20;
 
@@ -173,13 +173,16 @@ export default function About() {
               ## EXECUTIVE SUMMARY
             </div>
             <p>
-              I am a <span className="text-primary font-semibold">Full Stack Software Engineer</span> with <span className="text-cyanAccent font-semibold font-mono">2.8+ years</span> of professional experience architecting distributed backend nodes and performance-tuned SaaS dashboards. 
+              I am a <span className="text-primary font-semibold">Full Stack Software Engineer</span> with <span className="text-cyanAccent font-semibold font-mono">3.5+ years</span> of professional experience architecting distributed backend nodes and performance-tuned SaaS dashboards. 
             </p>
             <p>
               My expertise centers around the **MERN + Next.js** stack, specializing in building event-driven API layers, microservice architectures, and optimizing relational/non-relational database query pipelines. I design for predictable throughput, low query latency, and high client-side responsiveness.
             </p>
             <p>
               I own end-to-end feature lifecycles and excel in agile, collaborative sprints. By combining technical systems thinking with AI-integrated workspaces (Cursor, GPT integrations), I accelerate product delivery while maintaining high coverage tests and clean, decoupled codebase patterns.
+            </p>
+            <p>
+              I have also worked with <span className="text-primary font-semibold">international clients</span>, handling requirements, communication, feedback cycles, and delivery with a professional, ownership-driven approach across time zones and changing business priorities.
             </p>
 
             <div className="font-mono text-xs text-primary bg-[#1f1f1f] p-2 border-l-2 border-amberAccent mt-6 mb-4">
