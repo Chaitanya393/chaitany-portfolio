@@ -8,7 +8,7 @@ export default function Projects() {
 
   const projectData = [
     {
-      id: 3,
+      id: 0,
       name: 'Nesting ERP',
       tabName: 'NestingERP.tsx',
       role: 'Full Stack Developer',
@@ -84,7 +84,7 @@ return api.success({ resident, status: 'ACTIVE' });`,
     },
 
     {
-      id: 3,
+      id: 1,
       name: 'Memoralive',
       tabName: 'Memoralive.tsx',
       role: 'Frontend Developer',
@@ -203,7 +203,7 @@ export default function MemoraliveStream() {
       live: '#'
     },
     {
-      id: 3,
+      id: 2,
       name: 'Stock Genie',
       tabName: 'StockGenie.py',
       role: 'Creator & Lead Developer',
