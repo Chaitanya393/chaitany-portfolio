@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal as TermIcon, CornerDownLeft, Circle } from 'lucide-react';
 
+const LinkedInIcon = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
 export default function Terminal() {
   // CLI State
   const [history, setHistory] = useState([
@@ -92,6 +100,7 @@ export default function Terminal() {
   experience  - Show timeline node operations
   arch        - Display microservices systems architecture map
   metrics     - Load current live server clusters telemetry metrics
+  linkedin    - Open direct LinkedIn profile uplink
   contact     - Launch secure communications interface
   neofetch    - Fetch hardware & software telemetry logs
   matrix      - Activate matrix digital rain overlay
@@ -117,24 +126,37 @@ export default function Terminal() {
      /    \\     ------------------------
     |  []  |    OS: Web Browser Dashboard (React/Tailwind)
      \\_  _/     Kernel: Vite_Core_v8.0.16
-       \\/       Uptime: 2.8+ Career Years
+       \\/       Uptime: 3+ Career Years
                 Shell: Guest_Session_CLI
                 CPU: Full-Stack Developer Engine
                 Memory: 100% Commitment
                 Location: Indore, M.P.
                 Email: chaitanyatiwari2468@gmail.com
+                LinkedIn: https://www.linkedin.com/in/webchaitanya/
           `,
           type: 'output'
         });
         break;
 
+      case 'linkedin':
+        newHistory.push({
+          text: `[LINKEDIN_UPLINK_READY]:
+  Profile URL: https://www.linkedin.com/in/webchaitanya/
+  Redirecting client uplink to LinkedIn profile...`,
+          type: 'sys'
+        });
+        window.open('https://www.linkedin.com/in/webchaitanya/', '_blank');
+        break;
+
       case 'about':
         newHistory.push({
           text: `## PROFILE LOG: Chaitany Tiwari
-Full Stack Software Engineer with 2.8+ years of expertise.
+Full Stack Software Engineer with 3+ years of expertise.
 Specializes in Node.js, Express, React, Next.js, and DB systems.
+Direct experience collaborating with international clients across time zones—driving
+requirements gathering, clear communication, feedback cycles, delivery, and ownership.
 Strong focus on writing optimized database queries, REST microservices,
-and modular components.`,
+and scalable full-stack product ecosystems.`,
           type: 'output'
         });
         break;
@@ -145,7 +167,7 @@ and modular components.`,
 +-------------------------------------------------------------+
 | LAYER       | TECHNICAL ASSET SEGMENTS                      |
 +-------------------------------------------------------------+
-| Frontend    | Next.js, React.js, TypeScript, Redux, Tailwind|
+| Web & Mobile| Next.js, React.js, TypeScript   |
 | Backend     | Node.js, Express.js, PostgreSQL, MongoDB, WS  |
 | AI / LLM    | GPT APIs, Prompt Eng, Vector DBs, Webhooks    |
 | Operations  | Git, GitHub, Vercel, Jira, Agile Sprints      |
@@ -192,9 +214,10 @@ and modular components.`,
       case 'projects':
         newHistory.push({
           text: `## ARCHIVED PROJECT FILES:
-  1. Memoralive   [Next.js/WebRTC] - Real-time stream preservations UI.
-  2. Stock Genie  [React/WebSockets] - Live stock tracking dashboard with AI tips.
-  3. IAM Module   [Node.js/Mongo] - Security access keys and RBAC schemas.`,
+  1. Nesting ERP  [Next.js/Node] - Flagship full-stack ERP ecosystem (Web, APIs, MongoDB, Mobile).
+  2. Memoralive   [Next.js/WebRTC] - Real-time stream preservations UI.
+  3. Stock Genie  [React/WebSockets] - Live stock tracking dashboard with AI tips.
+  4. IAM Module   [Node.js/Mongo] - Security access keys and RBAC schemas.`,
           type: 'output'
         });
         break;
@@ -480,13 +503,25 @@ and modular components.`,
             </div>
 
             {!isSending && (
-              <button
-                type="submit"
-                className="w-full py-3 bg-electric border border-electric text-primary hover:bg-transparent hover:text-electric transition-all tracking-widest text-xs uppercase flex justify-center items-center gap-2 mt-4 font-bold"
-              >
-                <span>CONTACT_ME</span>
-                <span>→</span>
-              </button>
+              <div className="space-y-2 mt-4">
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-electric border border-electric text-primary hover:bg-transparent hover:text-electric transition-all tracking-widest text-xs uppercase flex justify-center items-center gap-2 font-bold"
+                >
+                  <span>CONTACT_ME</span>
+                  <span>→</span>
+                </button>
+                <a
+                  href="https://www.linkedin.com/in/webchaitanya/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full py-2 bg-[#141414] border border-hairline hover:border-cyanAccent text-secondary hover:text-primary transition-all tracking-wider text-[10px] uppercase flex justify-center items-center gap-1.5 font-mono rounded"
+                >
+                  <LinkedInIcon size={12} className="text-cyanAccent" />
+                  <span>CONNECT_ON_LINKEDIN</span>
+                  <span className="text-[9px] text-hairline hover:text-cyanAccent">↗</span>
+                </a>
+              </div>
             )}
           </form>
         </div>
@@ -494,7 +529,7 @@ and modular components.`,
 
       {/* Preset shortcut buttons for quick desktop/mobile clicks */}
       <div className="w-full max-w-[1080px] mt-4 flex flex-wrap gap-2 justify-start font-mono text-[9px] select-none">
-        {['help', 'about', 'skills', 'projects', 'experience', 'arch', 'metrics', 'neofetch', 'matrix', 'contact'].map((btn) => (
+        {['help', 'about', 'skills', 'projects', 'experience', 'arch', 'metrics', 'linkedin', 'neofetch', 'matrix', 'contact'].map((btn) => (
           <button
             key={btn}
             onClick={() => handleCommand(btn)}

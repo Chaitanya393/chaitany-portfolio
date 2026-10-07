@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Shield, Cpu, Activity, Award, Mail, Copy, Check } from 'lucide-react';
 
+const LinkedInIcon = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
 export default function Hero({ onNavigate }) {
   const [typedText, setTypedText] = useState('');
   const [roleIndex, setRoleIndex] = useState(0);
@@ -108,7 +116,7 @@ export default function Hero({ onNavigate }) {
           <div className="bg-[#141414] p-3 border border-hairline relative">
             <span className="absolute top-1 right-1 text-[8px] text-hairline">EXP</span>
             <div className="text-[9px] text-secondary">EXPERIENCE</div>
-            <div className="text-sm font-bold text-primary font-display mt-1">2.8+ YRS</div>
+            <div className="text-sm font-bold text-primary font-display mt-1">3+ YEARS</div>
           </div>
           <div className="bg-[#141414] p-3 border border-hairline relative">
             <span className="absolute top-1 right-1 text-[8px] text-hairline">LOC</span>
@@ -177,6 +185,21 @@ export default function Hero({ onNavigate }) {
               </>
             )}
           </button>
+
+          {/* LinkedIn Uplink */}
+          <div className="flex items-center gap-2 border-l border-hairline pl-3">
+            <span className="text-hairline">// LINKEDIN:</span>
+            <a
+              href="https://www.linkedin.com/in/webchaitanya/"
+              target="_blank"
+              rel="noreferrer"
+              className="text-cyanAccent hover:text-electric transition-colors duration-200 font-bold flex items-center gap-1.5"
+            >
+              <LinkedInIcon size={12} className="text-cyanAccent" />
+              <span>webchaitanya</span>
+              <span className="text-[9px] text-hairline hover:text-cyanAccent">↗</span>
+            </a>
+          </div>
         </div>
       </div>
 

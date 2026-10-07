@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Cpu, BookOpen, Layers } from 'lucide-react';
 
+const LinkedInIcon = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
 export default function About() {
   const [years, setYears] = useState(0);
   const [projects, setProjects] = useState(0);
@@ -8,8 +16,8 @@ export default function About() {
 
   // Simple count-up telemetry effect on load
   useEffect(() => {
-    const yearsEnd = 3.5;
-    const projectsEnd = 3;
+    const yearsEnd = 3;
+    const projectsEnd = 4;
     const skillsEnd = 20;
 
     let startTime;
@@ -19,7 +27,7 @@ export default function About() {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       
-      setYears((progress * yearsEnd).toFixed(1));
+      setYears(Math.round(progress * yearsEnd));
       setProjects(Math.floor(progress * projectsEnd));
       setSkills(Math.floor(progress * skillsEnd));
 
@@ -140,7 +148,7 @@ export default function About() {
           {/* Quick Metrics telemetry */}
           <div className="w-full max-w-[260px] mt-6 grid grid-cols-3 gap-2 font-mono text-center">
             <div className="bg-[#141414] border border-hairline p-2 text-secondary">
-              <div className="text-[14px] font-bold text-primary font-display">{years}</div>
+              <div className="text-[14px] font-bold text-primary font-display">{years}+</div>
               <div className="text-[8px] uppercase tracking-wider">Years Exp</div>
             </div>
             <div className="bg-[#141414] border border-hairline p-2 text-secondary">
@@ -152,6 +160,20 @@ export default function About() {
               <div className="text-[8px] uppercase tracking-wider">Skills</div>
             </div>
           </div>
+
+          {/* LinkedIn Profile Uplink */}
+          <a
+            href="https://www.linkedin.com/in/webchaitanya/"
+            target="_blank"
+            rel="noreferrer"
+            className="w-full max-w-[260px] mt-2.5 px-3 py-1.5 bg-[#141414] border border-hairline hover:border-cyanAccent text-secondary hover:text-primary transition-all rounded font-mono text-[9px] flex items-center justify-between group"
+          >
+            <div className="flex items-center gap-1.5">
+              <LinkedInIcon size={11} className="text-cyanAccent group-hover:scale-110 transition-transform" />
+              <span>LINKEDIN: webchaitanya</span>
+            </div>
+            <span className="text-[9px] text-hairline group-hover:text-cyanAccent group-hover:translate-x-0.5 transition-transform">↗</span>
+          </a>
         </div>
 
         {/* Right Column: Bio as System Readme */}
@@ -173,7 +195,7 @@ export default function About() {
               ## EXECUTIVE SUMMARY
             </div>
             <p>
-              I am a <span className="text-primary font-semibold">Full Stack Software Engineer</span> with <span className="text-cyanAccent font-semibold font-mono">3.5+ years</span> of professional experience architecting distributed backend nodes and performance-tuned SaaS dashboards. 
+              I am a <span className="text-primary font-semibold">Full Stack Software Engineer</span> with <span className="text-cyanAccent font-semibold font-mono">3+ years</span> of professional experience architecting distributed backend nodes and performance-tuned SaaS dashboards. 
             </p>
             <p>
               My expertise centers around the **MERN + Next.js** stack, specializing in building event-driven API layers, microservice architectures, and optimizing relational/non-relational database query pipelines. I design for predictable throughput, low query latency, and high client-side responsiveness.
@@ -182,7 +204,7 @@ export default function About() {
               I own end-to-end feature lifecycles and excel in agile, collaborative sprints. By combining technical systems thinking with AI-integrated workspaces (Cursor, GPT integrations), I accelerate product delivery while maintaining high coverage tests and clean, decoupled codebase patterns.
             </p>
             <p>
-              I have also worked with <span className="text-primary font-semibold">international clients</span>, handling requirements, communication, feedback cycles, and delivery with a professional, ownership-driven approach across time zones and changing business priorities.
+              I have hands-on experience working directly with <span className="text-primary font-semibold">international clients</span>, managing requirements gathering, clear asynchronous and synchronous communication, rapid feedback cycles, and dependable milestone delivery with complete ownership across different time zones.
             </p>
 
             <div className="font-mono text-xs text-primary bg-[#1f1f1f] p-2 border-l-2 border-amberAccent mt-6 mb-4">
@@ -197,6 +219,9 @@ export default function About() {
               </li>
               <li>
                 <strong className="text-primary">Secured Access Control:</strong> Formulating role-based token validation routines (RBAC), cookie-secured JWT token rotation, and strict API rate limits.
+              </li>
+              <li>
+                <strong className="text-primary">Global Client Delivery:</strong> Managing direct client communication, converting business goals into robust technical deliverables, running proactive feedback loops, and ensuring timely delivery across cross-timezone teams.
               </li>
             </ul>
           </div>

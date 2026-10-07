@@ -8,6 +8,14 @@ import Experience from './components/Experience';
 import Terminal from './components/Terminal';
 import { Target, BarChart2, Radio } from 'lucide-react';
 
+const LinkedInIcon = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [gridScanning, setGridScanning] = useState(true);
@@ -118,6 +126,20 @@ export default function App() {
             <div>
               <span>LONG_INDEX: </span>
               <span className="text-primary font-bold">75.8577</span>
+            </div>
+
+            {/* Social Network Uplink */}
+            <div className="border-t border-hairline/60 pt-2.5 mt-2">
+              <a
+                href="https://www.linkedin.com/in/webchaitanya/"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-secondary hover:text-cyanAccent transition-colors group py-0.5"
+              >
+                <LinkedInIcon size={11} className="text-cyanAccent group-hover:scale-110 transition-transform" />
+                <span className="tracking-wider">LINKEDIN_UPLINK</span>
+                <span className="text-[8px] text-hairline group-hover:text-cyanAccent ml-auto">↗</span>
+              </a>
             </div>
           </div>
         </nav>

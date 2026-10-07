@@ -12,71 +12,128 @@ export default function Projects() {
       name: 'Nesting ERP',
       tabName: 'NestingERP.tsx',
       role: 'Full Stack Developer',
-      tech: ['Next.js', 'React', 'Node.js', 'Express.js', 'MongoDB', 'React Native', 'JWT'],
-      summary: 'Built and evolved a production-oriented ERP ecosystem for student housing and property operations, spanning admin workflows, resident management, tenant onboarding, expenses, salaries, and a mobile-first experience.',
+      featured: true,
+      badge: 'FLAGSHIP PROJECT',
+      tech: ['Next.js', 'React', 'Node.js', 'Express.js', 'MongoDB', /* 'React Native', */ 'JWT'],
+      summary: 'Architected and developed a production-grade ERP ecosystem for student housing and hostel operations. As Full Stack Developer, owned the entire product lifecycle across core tiers: web ERP admin dashboard, backend REST APIs, and scalable MongoDB schemas—streamlining tenant onboarding, room allocations, expense ledgers, and staff payroll.',
+      ecosystem: [
+        { title: 'Web ERP', tech: 'Next.js & React', desc: 'Admin portal for rooms, tenant onboarding, expenses, and payroll' },
+        { title: 'Backend APIs', tech: 'Node.js & Express', desc: 'REST services with JWT auth, role validation, and business logic' },
+        { title: 'Database Layer', tech: 'MongoDB', desc: 'Optimized schemas for tenant records, audit telemetry, and ledgers' },
+        // { title: 'Mobile App', tech: 'React Native', desc: 'Cross-platform resident client for mobile onboarding and operations' },
+      ],
       metrics: {
-        platform: 'WEB + MOBILE',
-        architecture: 'FULL_STACK',
-        delivery: 'END_TO_END',
+        ecosystem: 'WEB + API + DB',
+        database: 'MONGODB (SCHEMAS)',
+        role: 'FULL STACK DEV',
       },
-      codeSnippet: `// Nesting ERP — full-stack workflow
-const tenant = await tenantService.createApplication(payload);
-const resident = await residentService.enroll(tenant);
+      codeSnippet: `// Nesting ERP — Complete Product Ecosystem Workflow
+// [Web ERP & Mobile Client -> Node/Express REST API -> MongoDB]
 
-await billingService.syncExpenses(resident);
-await notificationService.dispatch(resident);
+export async function processTenantOnboarding(req: Request, res: Response) {
+  const { applicantId, roomNumber, securityDeposit } = req.body;
 
-return api.success({ resident, status: 'ACTIVE' });`,
+  // 1. Transactional Database Layer (MongoDB)
+  const tenant = await TenantApplication.findById(applicantId);
+  const resident = await Resident.enroll(tenant, { roomNumber, status: 'ACTIVE' });
+
+  // 2. Billing & Ledger Sync (Web ERP Expense Engine)
+  await LedgerService.recordTransaction({
+    residentId: resident._id,
+    type: 'ROOM_DEPOSIT',
+    amount: securityDeposit,
+    syncedToWebERP: true
+  });
+
+  // 3. Dispatch Push Notification {/* to React Native Mobile Client */}
+  await PushNotifier.send(resident.pushToken, {
+    title: 'Nesting Mobile // Access Activated',
+    body: \`Room \${roomNumber} assigned. Welcome to your resident portal!\`
+  });
+
+  return res.status(200).json({ success: true, residentId: resident._id });
+}`,
       vectorRender: () => (
         <div className="w-full h-full bg-[#111] border border-hairline rounded p-3 font-mono flex flex-col justify-between">
           <div className="flex justify-between items-center border-b border-hairline pb-2 mb-2">
-            <span className="text-xs font-bold text-cyanAccent">NESTING_ERP // LIVE</span>
-            <span className="text-[8px] text-green-500 bg-green-500/10 px-1 border border-green-500/20">SYSTEM_READY</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-amberAccent animate-pulse"></span>
+              <span className="text-xs font-bold text-amberAccent">NESTING_ERP // COMPLETE_ECOSYSTEM</span>
+            </div>
+            <span className="text-[8px] text-amberAccent bg-amberAccent/10 px-1.5 py-0.5 border border-amberAccent/30 font-bold">FLAGSHIP_ACTIVE</span>
           </div>
           <div className="grid grid-cols-2 gap-2 flex-grow">
             <div className="border border-hairline bg-[#161616] rounded p-2">
-              <div className="text-[8px] text-secondary mb-2">OPERATIONS</div>
+              <div className="text-[8px] text-amberAccent font-bold mb-2 flex items-center justify-between">
+                <span>ECOSYSTEM TIERS</span>
+                <span className="text-[7px] text-secondary">3/3 ONLINE</span>
+              </div>
               <div className="space-y-1.5 text-[9px]">
-                <div className="flex justify-between"><span>Residents</span><span className="text-cyanAccent">ACTIVE</span></div>
-                <div className="flex justify-between"><span>Tenants</span><span className="text-cyanAccent">SYNCED</span></div>
-                <div className="flex justify-between"><span>Expenses</span><span className="text-cyanAccent">TRACKED</span></div>
+                <div className="flex justify-between"><span>Web ERP</span><span className="text-cyanAccent font-bold">ONLINE</span></div>
+                <div className="flex justify-between"><span>Backend APIs</span><span className="text-cyanAccent font-bold">ONLINE</span></div>
+                <div className="flex justify-between"><span>MongoDB Layer</span><span className="text-cyanAccent font-bold">SYNCED</span></div>
+                {/* <div className="flex justify-between"><span>React Native</span><span className="text-green-500 font-bold">ACTIVE</span></div> */}
               </div>
             </div>
             <div className="border border-hairline bg-[#161616] rounded p-2">
-              <div className="text-[8px] text-secondary mb-2">PLATFORM</div>
+              <div className="text-[8px] text-cyanAccent font-bold mb-2 flex items-center justify-between">
+                <span>OPERATIONS ENGINE</span>
+                <span className="text-[7px] text-secondary">STATUS</span>
+              </div>
               <div className="space-y-1.5 text-[9px]">
-                <div className="flex justify-between"><span>Web</span><span className="text-green-500">ONLINE</span></div>
-                <div className="flex justify-between"><span>Mobile</span><span className="text-green-500">ONLINE</span></div>
-                <div className="flex justify-between"><span>API</span><span className="text-green-500">ONLINE</span></div>
+                <div className="flex justify-between"><span>Resident Mgmt</span><span className="text-green-500">LIVE</span></div>
+                <div className="flex justify-between"><span>Tenant Onboard</span><span className="text-green-500">VERIFIED</span></div>
+                <div className="flex justify-between"><span>Expenses & Salary</span><span className="text-green-500">TRACKED</span></div>
+                <div className="flex justify-between"><span>Mobile Sync</span><span className="text-amberAccent">REAL-TIME</span></div>
               </div>
             </div>
           </div>
-          <div className="mt-2 text-[8px] text-secondary flex justify-between">
-            <span>STACK: NEXT + NODE + MONGO</span>
-            <span>MODE: PRODUCTION</span>
+          <div className="mt-2 text-[8px] text-secondary flex justify-between border-t border-hairline/40 pt-1.5">
+            <span>ROLE: FULL STACK DEVELOPER</span>
+            <span className="text-amberAccent font-bold">COMPLETE PRODUCT ECOSYSTEM</span>
           </div>
         </div>
       ),
       architectureRender: () => (
         <svg viewBox="0 0 320 160" className="w-full h-full text-secondary font-mono">
           <rect x="5" y="5" width="310" height="150" fill="none" stroke="#222" strokeWidth="1" />
-          <rect x="10" y="55" width="78" height="36" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
-          <text x="49" y="71" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Next.js ERP</text>
-          <text x="49" y="82" textAnchor="middle" fill="#888" fontSize="6">Admin / Resident</text>
-          <rect x="112" y="55" width="88" height="36" fill="#141414" stroke="#2563EB" strokeWidth="1.5" />
-          <text x="156" y="71" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Node / Express</text>
-          <text x="156" y="82" textAnchor="middle" fill="#888" fontSize="6">REST / JWT</text>
-          <rect x="224" y="20" width="84" height="36" fill="#141414" stroke="#F59E0B" strokeWidth="1.5" />
-          <text x="266" y="36" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">MongoDB</text>
-          <text x="266" y="47" textAnchor="middle" fill="#888" fontSize="6">ERP Data</text>
-          <rect x="224" y="90" width="84" height="36" fill="#141414" stroke="#222" strokeWidth="1.5" />
-          <text x="266" y="106" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">React Native</text>
-          <text x="266" y="117" textAnchor="middle" fill="#888" fontSize="6">Mobile Client</text>
-          <path d="M 88 73 L 112 73" fill="none" stroke="#06B6D4" strokeWidth="1" />
-          <path d="M 200 73 L 214 73 L 214 38 L 224 38" fill="none" stroke="#2563EB" strokeWidth="1" />
-          <path d="M 200 73 L 214 73 L 214 108 L 224 108" fill="none" stroke="#2563EB" strokeWidth="1" />
-          <circle cx="100" cy="73" r="2" fill="#06B6D4" className="animate-ping" />
-          <circle cx="100" cy="73" r="1.5" fill="#06B6D4" />
+          {/* Tier 1: Web ERP Dashboard */}
+          <rect x="10" y="20" width="84" height="42" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
+          <text x="52" y="36" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Web ERP Client</text>
+          <text x="52" y="47" textAnchor="middle" fill="#06B6D4" fontSize="6">Next.js / React</text>
+          <text x="52" y="56" textAnchor="middle" fill="#888" fontSize="5">Admin / Staff Portal</text>
+
+          {/* Tier 4: Mobile Client */}
+          <rect x="10" y="88" width="84" height="42" fill="#141414" stroke="#06B6D4" strokeWidth="1.5" />
+          <text x="52" y="104" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Mobile App</text>
+          {/* <text x="52" y="115" textAnchor="middle" fill="#06B6D4" fontSize="6">React Native</text> */}
+          <text x="52" y="124" textAnchor="middle" fill="#888" fontSize="5">Resident & Tenant</text>
+
+          {/* Tier 2: Backend APIs */}
+          <rect x="114" y="54" width="92" height="48" fill="#141414" stroke="#2563EB" strokeWidth="1.5" />
+          <text x="160" y="70" textAnchor="middle" fill="#F5F5F5" fontSize="7.5" className="font-bold">Backend APIs</text>
+          <text x="160" y="81" textAnchor="middle" fill="#2563EB" fontSize="6">Node.js / Express</text>
+          <text x="160" y="91" textAnchor="middle" fill="#888" fontSize="5">JWT Auth & Workflows</text>
+
+          {/* Tier 3: MongoDB Database */}
+          <rect x="226" y="20" width="84" height="42" fill="#141414" stroke="#F59E0B" strokeWidth="1.5" />
+          <text x="268" y="36" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Database Layer</text>
+          <text x="268" y="47" textAnchor="middle" fill="#F59E0B" fontSize="6">MongoDB Schemas</text>
+          <text x="268" y="56" textAnchor="middle" fill="#888" fontSize="5">Tenants / Ledgers</text>
+
+          {/* Notification / Sync Services */}
+          <rect x="226" y="88" width="84" height="42" fill="#141414" stroke="#222" strokeWidth="1.5" />
+          <text x="268" y="104" textAnchor="middle" fill="#F5F5F5" fontSize="7" className="font-bold">Sync & Push Serv</text>
+          <text x="268" y="115" textAnchor="middle" fill="#27c93f" fontSize="6">Real-Time Mobile</text>
+          <text x="268" y="124" textAnchor="middle" fill="#888" fontSize="5">Alerts & Receipts</text>
+
+          {/* Connectors */}
+          <path d="M 94 41 L 104 41 L 104 68 L 114 68" fill="none" stroke="#06B6D4" strokeWidth="1" />
+          <path d="M 94 109 L 104 109 L 104 88 L 114 88" fill="none" stroke="#06B6D4" strokeWidth="1" />
+          <path d="M 206 68 L 216 68 L 216 41 L 226 41" fill="none" stroke="#2563EB" strokeWidth="1" />
+          <path d="M 206 88 L 216 88 L 216 109 L 226 109" fill="none" stroke="#2563EB" strokeWidth="1" />
+          <circle cx="104" cy="78" r="2" fill="#06B6D4" className="animate-ping" />
+          <circle cx="104" cy="78" r="1.5" fill="#06B6D4" />
         </svg>
       ),
       github: 'https://github.com/Chaitanya393/nesting-frontend',
@@ -495,6 +552,7 @@ export async function authorizeRBAC(req, res, next) {
         <div className="bg-[#141414] border-b border-hairline flex items-end px-2 pt-2 gap-1 overflow-x-auto select-none">
           {projectData.map((proj, idx) => {
             const isActive = idx === activeTab;
+            const isFeatured = proj.featured;
             return (
               <button
                 key={proj.id}
@@ -502,14 +560,23 @@ export async function authorizeRBAC(req, res, next) {
                   setActiveTab(idx);
                   setTilt({ x: 0, y: 0 }); // reset
                 }}
-                className={`group flex items-center gap-1.5 px-4 py-2 border-t border-x rounded-t font-mono text-[11px] transition-all ${isActive
-                  ? 'bg-surface1 text-primary border-hairline'
-                  : 'bg-[#181818] text-secondary border-transparent hover:text-primary hover:bg-[#1a1a1a]'
+                className={`group flex items-center gap-1.5 px-3.5 py-2 border-t border-x rounded-t font-mono text-[11px] transition-all relative ${isActive
+                  ? isFeatured
+                    ? 'bg-surface1 text-primary border-amberAccent/50 shadow-[0_-2px_12px_rgba(245,158,11,0.2)] font-bold'
+                    : 'bg-surface1 text-primary border-hairline'
+                  : isFeatured
+                    ? 'bg-[#1a1710] text-amberAccent/90 border-amberAccent/30 hover:text-amberAccent hover:bg-[#201c13]'
+                    : 'bg-[#181818] text-secondary border-transparent hover:text-primary hover:bg-[#1a1a1a]'
                   }`}
               >
-                <FileCode size={12} className={isActive ? 'text-cyanAccent' : 'text-secondary'} />
+                <FileCode size={12} className={isActive ? (isFeatured ? 'text-amberAccent' : 'text-cyanAccent') : 'text-secondary'} />
                 <span>{proj.tabName}</span>
-                <span className={`text-[8px] ml-1 transition-opacity ${isActive ? 'text-amberAccent' : 'text-transparent group-hover:text-secondary'}`}>
+                {isFeatured && (
+                  <span className="px-1.5 py-0.5 text-[7px] tracking-wider bg-amberAccent/15 text-amberAccent border border-amberAccent/40 rounded font-bold uppercase ml-1 animate-pulse">
+                    ★ FEATURED
+                  </span>
+                )}
+                <span className={`text-[8px] ml-1 transition-opacity ${isActive ? (isFeatured ? 'text-amberAccent' : 'text-cyanAccent') : 'text-transparent group-hover:text-secondary'}`}>
                   ●
                 </span>
               </button>
@@ -523,13 +590,13 @@ export async function authorizeRBAC(req, res, next) {
           <div className="lg:col-span-6 border-b lg:border-b-0 lg:border-r border-hairline p-4 font-mono text-[11px] text-secondary text-left overflow-y-auto max-h-[350px] bg-[#0c0c0c] custom-scrollbars select-text">
             <div className="text-[10px] text-hairline border-b border-hairline/25 pb-1 mb-2.5 flex justify-between">
               <span>CONSOLE_EDITOR</span>
-              <span>LINES: 18</span>
+              <span>LINES: {activeProj.codeSnippet.split('\n').length}</span>
             </div>
 
             {/* Simulated Line Numbers */}
             <div className="flex gap-4">
               <div className="text-[#333] select-none text-right border-r border-hairline/20 pr-2.5 flex flex-col font-bold">
-                {[...Array(22)].map((_, i) => (
+                {[...Array(Math.max(22, activeProj.codeSnippet.split('\n').length))].map((_, i) => (
                   <span key={i}>{i + 1}</span>
                 ))}
               </div>
@@ -540,13 +607,32 @@ export async function authorizeRBAC(req, res, next) {
           </div>
 
           {/* Right Column: Visual Telemetry + Mockup */}
-          <div className="lg:col-span-6 p-4 md:p-6 flex flex-col justify-between gap-6 bg-[#0E0E0E]">
+          <div className="lg:col-span-6 p-4 md:p-6 flex flex-col justify-between gap-5 bg-[#0E0E0E]">
             {/* Visual Panel showing details */}
-            <div className="text-left space-y-4">
-              <div className="flex justify-between items-center">
-                <h3 className="font-display font-bold text-lg text-primary uppercase">{activeProj.name}</h3>
-                <span className="text-[9px] font-mono text-cyanAccent border border-cyanAccent/30 px-1.5 py-0.5 rounded bg-cyanAccent/5">
-                  {activeProj.role}
+            <div className="text-left space-y-3.5">
+              {/* Featured Flagship Banner for Nesting ERP */}
+              {activeProj.featured && (
+                <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-1.5 bg-gradient-to-r from-amberAccent/15 via-[#18140c] to-transparent border-l-2 border-amberAccent border-y border-r border-hairline/60 rounded text-[9px] font-mono text-amberAccent select-none">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-amberAccent animate-pulse"></span>
+                    <span className="font-bold tracking-widest uppercase">★ PRIMARY FEATURED PROJECT // FLAGSHIP ERP</span>
+                  </div>
+                  <span className="text-[8px] text-primary/80 bg-[#141414] px-1.5 py-0.5 border border-hairline rounded font-mono">
+                    FULL PRODUCT ECOSYSTEM
+                  </span>
+                </div>
+              )}
+
+              <div className="flex flex-wrap justify-between items-center gap-2">
+                <h3 className={`font-display font-bold uppercase tracking-tight text-primary ${activeProj.featured ? 'text-xl md:text-2xl' : 'text-lg'}`}>
+                  {activeProj.name}
+                </h3>
+                <span className={`text-[9px] font-mono px-2 py-0.5 rounded flex items-center gap-1.5 font-bold ${activeProj.featured
+                  ? 'text-amberAccent border border-amberAccent/50 bg-amberAccent/10 shadow-[0_0_10px_rgba(245,158,11,0.15)]'
+                  : 'text-cyanAccent border border-cyanAccent/30 bg-cyanAccent/5'
+                  }`}>
+                  <Shield size={11} className={activeProj.featured ? 'text-amberAccent' : 'text-cyanAccent'} />
+                  ROLE: {activeProj.role}
                 </span>
               </div>
 
@@ -554,10 +640,35 @@ export async function authorizeRBAC(req, res, next) {
                 {activeProj.summary}
               </p>
 
+              {/* Complete Ecosystem Breakdown for Nesting ERP */}
+              {activeProj.ecosystem && (
+                <div className="space-y-1.5 pt-0.5">
+                  <div className="text-[9px] font-mono text-secondary flex items-center justify-between">
+                    <span className="text-primary font-bold uppercase tracking-wider">// COMPLETE PRODUCT ECOSYSTEM:</span>
+                    <span className="text-amberAccent text-[8px] font-mono font-bold">CORE TIERS INTEGRATED</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-[9px]">
+                    {activeProj.ecosystem.map((node) => (
+                      <div key={node.title} className="bg-surface1 border border-hairline hover:border-amberAccent/60 p-2 rounded transition-colors group">
+                        <div className="text-amberAccent font-bold flex items-center gap-1">
+                          <span className="w-1 h-1 rounded-full bg-amberAccent"></span>
+                          <span>{node.title}</span>
+                        </div>
+                        <div className="text-[8px] text-cyanAccent mt-0.5 font-semibold">{node.tech}</div>
+                        <div className="text-[8px] text-secondary mt-1 leading-snug">{node.desc}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Technologies Badges */}
               <div className="flex flex-wrap gap-1.5 font-mono text-[9px]">
                 {activeProj.tech.map((t) => (
-                  <span key={t} className="px-2 py-0.5 bg-surface1 border border-hairline rounded text-primary hover:border-cyanAccent transition-colors">
+                  <span key={t} className={`px-2 py-0.5 bg-surface1 border rounded text-primary transition-colors ${activeProj.featured && (t === 'Next.js' || t === 'MongoDB' || t === 'Node.js')
+                    ? 'border-amberAccent/40 hover:border-amberAccent'
+                    : 'border-hairline hover:border-cyanAccent'
+                    }`}>
                     #{t}
                   </span>
                 ))}
@@ -568,7 +679,7 @@ export async function authorizeRBAC(req, res, next) {
                 {Object.entries(activeProj.metrics).map(([key, value]) => (
                   <div key={key} className="text-center">
                     <div className="text-secondary uppercase">{key}</div>
-                    <div className="text-primary font-bold mt-1 text-[11px]">{value}</div>
+                    <div className={`font-bold mt-1 text-[11px] ${activeProj.featured ? 'text-amberAccent' : 'text-primary'}`}>{value}</div>
                   </div>
                 ))}
               </div>
@@ -589,7 +700,7 @@ export async function authorizeRBAC(req, res, next) {
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff5f56]"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ffbd2e]"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#27c93f]"></span>
-                <div className="bg-bg border border-hairline text-[8px] px-2 py-0.5 text-secondary flex items-center gap-1 ml-4 rounded w-40 overflow-hidden truncate">
+                <div className="bg-bg border border-hairline text-[8px] px-2 py-0.5 text-secondary flex items-center gap-1 ml-4 rounded w-44 overflow-hidden truncate">
                   <Globe size={8} />
                   <span>https://chaitany-tiwari.io/{activeProj.name.toLowerCase().replace(' ', '-')}</span>
                 </div>
@@ -608,19 +719,24 @@ export async function authorizeRBAC(req, res, next) {
 
             {/* Action buttons */}
             <div className="flex gap-4 font-mono text-xs">
-              {/* <a 
-                href={activeProj.github} 
-                target="_blank" 
-                rel="noreferrer" 
+              <a
+                href={activeProj.github}
+                target="_blank"
+                rel="noreferrer"
                 className="flex-1 text-center py-2.5 bg-surface1 border border-hairline text-secondary hover:text-primary hover:border-cyanAccent transition-all rounded"
               >
                 [01]_VIEW_SOURCE_CODE
-              </a> */}
+              </a>
               <a
                 href={activeProj.live}
-                className="flex-1 text-center py-2.5 bg-electric border border-electric text-primary hover:bg-transparent hover:text-electric transition-all rounded"
+                target="_blank"
+                rel="noreferrer"
+                className={`flex-1 text-center py-2.5 border transition-all rounded font-bold ${activeProj.featured
+                  ? 'bg-amberAccent/20 border-amberAccent text-amberAccent hover:bg-amberAccent hover:text-bg'
+                  : 'bg-electric border-electric text-primary hover:bg-transparent hover:text-electric'
+                  }`}
               >
-                [02]_LAUNCH_STAGING
+                {activeProj.featured ? '[02]_EXPLORE_FLAGSHIP' : '[02]_LAUNCH_STAGING'}
               </a>
             </div>
 

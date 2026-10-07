@@ -17,7 +17,8 @@ export default function Experience() {
         'Developed reusable client dashboards in React and Next.js, implementing strict code-splitting, lazy routing, and server-side cache layers.',
         'Formulated secure JWT token rotation patterns and HTTP-only cookie guards, completely mitigating client-side session injection vulnerabilities.',
         'Unified API request/response flows by implementing centralized interceptors, lowering overall API error handler code footprints by 30%.',
-        'Coordinated closely with backend architects to build decoupled API contracts and review JSON-Schema payloads to ensure validation standards.'
+        'Coordinated closely with backend architects to build decoupled API contracts and review JSON-Schema payloads to ensure validation standards.',
+        'Collaborated directly with international clients: gathered technical requirements, maintained proactive feedback loops, and delivered production features with full ownership across time zones.'
       ],
       telemetry: {
         serverState: 'PRODUCTION_STABLE',
